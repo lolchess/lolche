@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 function Navigation(): JSX.Element {
@@ -6,6 +5,7 @@ function Navigation(): JSX.Element {
   return (
     <div>
       <button onClick={() => navigate("/community")}>커뮤니티</button>
+      <button onClick={() => navigate("/RankTable")}>순위표</button>
     </div>
   );
 }
