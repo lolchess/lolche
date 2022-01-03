@@ -14,6 +14,20 @@ export const StyledLi = styled.li`
   cursor: pointer;
 `;
 
+export const StyledButton = styled.div`
+  height: 30px;
+  width: 50px;
+  background-color: #404040;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 2em;
+  border: 0;
+  font-weight: 400;
+  line-height: 2.66667;
+
+  color: #f9f9f9;
+`;
+
 interface StyledStackProps {
   height?: string;
   width?: string;
