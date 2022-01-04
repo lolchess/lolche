@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
+import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDAkiPzYO1n_OVOwORUmR_uxoLnhgB-oeM",
@@ -19,3 +20,5 @@ const analytics = getAnalytics(app);
 
 export const firebase = app;
 export const dbService = db;
+
+export const realtimeDb = getDatabase(app);
