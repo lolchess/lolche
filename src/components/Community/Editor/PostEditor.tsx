@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import "./react-draft-wysiwyg.css";
 import styled from "styled-components";
@@ -18,14 +18,16 @@ const MyBlock = styled.div`
     border-radius: 2px !important;
   }
 `;
-
-const TestEditorForm = () => {
+interface TestEditorFormProps {
+  setEditorValue: React.Dispatch<React.SetStateAction<string>>;
+}
+function TestEditorForm({ setEditorValue }: TestEditorFormProps): JSX.Element {
   // useState로 상태관리하기 초기값은 EditorState.createEmpty()
   // EditorState의 비어있는 ContentState 기본 구성으로 새 개체를 반환 => 이렇게 안하면 상태 값을 나중에 변경할 수 없음.
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const editorToHtml = draftToHtml(
-    convertToRaw(editorState.getCurrentContent())
-  );
+  useEffect(() => {
+    setEditorValue(draftToHtml(convertToRaw(editorState.getCurrentContent())));
+  }, [editorState]);
 
   const onEditorStateChange = (editorState: EditorState) => {
     // editorState에 값 설정
@@ -61,6 +63,6 @@ const TestEditorForm = () => {
       />
     </MyBlock>
   );
-};
+}
 
 export default TestEditorForm;
