@@ -34,7 +34,7 @@ function NewPostEditor(): JSX.Element {
       });
 
       console.log("Document written with ID: ", docRef.id);
-      navigate("/Community/");
+      navigate("/community/");
     } catch (e) {
       console.error("Error adding document: ", e);
     }

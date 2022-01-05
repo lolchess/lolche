@@ -13,9 +13,9 @@ function App() {
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Community" element={<Community />} />
-        <Route path="/Community/NewPostEditor" element={<NewPostEditor />} />
-        <Route path="/Rank" element={<Rank />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/community/NewPostEditor" element={<NewPostEditor />} />
+        <Route path="/rank" element={<Rank />} />
       </Routes>
     </BrowserRouter>
   );

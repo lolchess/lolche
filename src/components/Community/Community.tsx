@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { StyledStack, StyledSection } from "../../styles/styles.component";
-import { StyledButton } from "../../styles/styles.component";
+import {
+  StyledStack,
+  StyledSection,
+  StyledLi,
+  StyledButton,
+} from "../../styles/styles.component";
 import { useNavigate } from "react-router";
 import { dbService } from "../../myFirebase";
 import {
@@ -23,12 +27,11 @@ interface Post {
 function Community(): JSX.Element {
   const navigate = useNavigate();
   const [list, setList] = useState<Post[]>([]);
-  const [page, setPage] = useState(1);
-  const limitNumber = 5;
+  const limitNumber = 10;
+  const communityRef = collection(dbService, "community");
+
   useEffect(() => {
     const fetchData = async () => {
-      const communityRef = collection(dbService, "community");
-
       const q = query(communityRef, orderBy("time"), limit(limitNumber));
       const querySnapshot = await getDocs(q);
       const items: Post[] = [];
@@ -46,11 +49,7 @@ function Community(): JSX.Element {
   }, []);
 
   const showNext = (item: Post) => {
-    //use this to show hide buttons if there is no records
     const fetchNextData = async () => {
-      const communityRef = collection(dbService, "community");
-      console.log(item);
-
       const q = query(
         communityRef,
         orderBy("time"),
@@ -66,9 +65,8 @@ function Community(): JSX.Element {
           nickname: doc.data().userNickname,
           time: doc.data().time,
         });
-        setList(items);
-        setPage(page + 1); //in case you like to show current page number you can use this
       });
+      setList(items);
     };
     fetchNextData();
   };
@@ -100,6 +98,9 @@ function Community(): JSX.Element {
       ></StyledSection>
 
       <StyledSection id="section-communityList" height="800px">
+        <StyledButton onClick={() => navigate("/community/NewPostEditor")}>
+          글 작성
+        </StyledButton>
         <StyledStack
           column
           alignItem="center"
@@ -108,23 +109,24 @@ function Community(): JSX.Element {
         >
           {list.map((post) => {
             return (
-              <div>
-                {post.title}
-                {post.nickname}
-              </div>
+              <StyledStack style={{ backgroundColor: "white" }}>
+                <StyledLi
+                  onClick={() => navigate(`/community/${post.id}`)}
+                  color={"black"}
+                >
+                  {post.title}
+                </StyledLi>
+                <StyledLi color={"black"}>{post.nickname}</StyledLi>
+              </StyledStack>
             );
           })}
           {list.length < limitNumber ? (
             <div></div>
           ) : (
-            <button onClick={() => showNext(list[limitNumber - 1])}>
+            <StyledButton onClick={() => showNext(list[limitNumber - 1])}>
               다음페이지
-            </button>
+            </StyledButton>
           )}
-
-          <StyledButton onClick={() => navigate("/Community/NewPostEditor")}>
-            글 작성
-          </StyledButton>
         </StyledStack>
       </StyledSection>
     </div>
