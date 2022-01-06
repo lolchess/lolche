@@ -63,8 +63,8 @@ export default function Chatting(): JSX.Element {
     });
   };
 
-  const onClickBtn = () => {
-    chatMsg();
+  const onClickBtn = async () => {
+    await chatMsg();
     setInput("");
   };
 
