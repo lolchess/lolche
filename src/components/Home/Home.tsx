@@ -2,21 +2,62 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { StyledStack, StyledSection } from "../../styles/styles.component";
+import {
+  StyledStack,
+  StyledSection,
+  StyledButton,
+} from "../../styles/styles.component";
 import { useNavigate } from "react-router";
+import useInput from "../../hooks/useInput";
 
+const StyledHomeInput = styled.input`
+  padding: 3px 10px;
+  width: 85%;
+  height: 40px;
+  font-size: 15px;
+  max-width: 300px;
+  outline: none;
+  border: 2px solid #bbb;
+  border-radius: 1px;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -ms-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+`;
 function Home(): JSX.Element {
   const navigate = useNavigate();
   AOS.init();
+  const [input, setInput, onChangeInput] = useInput("");
+
+  const onClickBtn = () => {
+    if (!input.length) return;
+
+    navigate("/UserPage/" + input);
+    setInput("");
+  };
+
   return (
     <div>
       <StyledSection id="section-homeSearch" color="#f5f5f5" height="600px">
         <h1 data-aos="fade-up" data-aos-delay="200">
           전장의 역사를 확인하세요.
         </h1>
-        <div data-aos="fade-in" data-aos-delay="200">
-          searchvar
-        </div>
+        <StyledStack width="300px" data-aos="fade-in" data-aos-delay="200">
+          <StyledHomeInput value={input} onChange={onChangeInput} />
+          <StyledButton
+            height="40px"
+            borderRadius="2px"
+            lineHeight="3.4"
+            onClick={onClickBtn}
+          >
+            찾기
+          </StyledButton>
+        </StyledStack>
       </StyledSection>
       <StyledSection
         id="section-homeRank"

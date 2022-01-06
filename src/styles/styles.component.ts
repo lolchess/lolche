@@ -18,16 +18,24 @@ export const StyledLi = styled.li<{ color?: string }>`
   cursor: pointer;
 `;
 
-export const StyledButton = styled.div`
-  height: 30px;
-  background-color: #404040;
+interface StyledButtonProps {
+  backgroundColor?: string;
+  borderRadius?: string;
+  height?: string;
+  lineHeight?: string;
+}
+
+export const StyledButton = styled.div<StyledButtonProps>`
+  height: ${(props) => props.height || "30px"};
+  background-color: ${(props) => props.backgroundColor || "#404040"};
   font-size: 12px;
   padding: 0 10px;
   cursor: pointer;
-  border-radius: 2em;
+  border-radius: ${(props) => props.borderRadius || "2em"};
   border: 0;
   font-weight: 400;
-  line-height: 2.66667;
+  line-height: ${(props) => props.lineHeight || "2.66667"};
+
   color: #f9f9f9;
 `;
 

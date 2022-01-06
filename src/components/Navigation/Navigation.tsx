@@ -1,6 +1,10 @@
 import { useNavigate } from "react-router";
 import styled from "styled-components";
-import { StyledLi, StyledStack } from "../../styles/styles.component";
+import {
+  StyledLi,
+  StyledStack,
+  StyledButton,
+} from "../../styles/styles.component";
 import useInput from "../../hooks/useInput";
 
 const StyledHeader = styled.header`
@@ -29,7 +33,10 @@ const StyledNav = styled.ul`
 
 const StyledInput = styled.input`
   padding: 3px 10px;
-  width: 70%;
+  width: 80%;
+  height: 30px;
+  margin: 5px 5px;
+  font-size: 15px;
   max-width: 300px;
   outline: none;
   border: 1px solid #bbb;
@@ -43,9 +50,6 @@ const StyledInput = styled.input`
   -ms-transition: 0.2s ease all;
   -o-transition: 0.2s ease all;
   transition: 0.2s ease all;
-  :focus {
-    border-color: blue;
-  }
 `;
 function Navigation(): JSX.Element {
   const navigate = useNavigate();
@@ -76,7 +80,7 @@ function Navigation(): JSX.Element {
 
         <StyledStack width="300px">
           <StyledInput value={input} onChange={onChangeInput} />
-          <button onClick={onClickBtn}>찾기</button>
+          <StyledLi onClick={onClickBtn}>찾기</StyledLi>
         </StyledStack>
       </StyledNav>
     </StyledHeader>
