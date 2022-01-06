@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
-import { StyledLi } from "../../styles/styles.component";
+import { StyledLi, StyledStack } from "../../styles/styles.component";
+import useInput from "../../hooks/useInput";
 
 const StyledHeader = styled.header`
   color: white;
@@ -27,8 +27,37 @@ const StyledNav = styled.ul`
   list-style: none;
 `;
 
+const StyledInput = styled.input`
+  padding: 3px 10px;
+  width: 70%;
+  max-width: 300px;
+  outline: none;
+  border: 1px solid #bbb;
+  border-radius: 1px;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -ms-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+  :focus {
+    border-color: blue;
+  }
+`;
 function Navigation(): JSX.Element {
   const navigate = useNavigate();
+  const [input, setInput, onChangeInput] = useInput("");
+
+  const onClickBtn = () => {
+    if (!input.length) return;
+
+    navigate("/UserPage/" + input);
+    setInput("");
+  };
+
   return (
     <StyledHeader id="header-nav">
       <StyledNav id="ul-nav">
@@ -45,7 +74,10 @@ function Navigation(): JSX.Element {
           채팅
         </StyledLi>
 
-        <div>searchvar</div>
+        <StyledStack width="300px">
+          <StyledInput value={input} onChange={onChangeInput} />
+          <button onClick={onClickBtn}>찾기</button>
+        </StyledStack>
       </StyledNav>
     </StyledHeader>
   );
