@@ -10,16 +10,33 @@ import {
 import { useEffect, useState } from "react";
 import useInput from "../../hooks/useInput";
 import { dbService } from "../../myFirebase";
+import makeNickname from "../../utils/makeNickname";
 
 interface message {
   id: string;
   text?: string;
+  nickname?: string;
 } // TODO: 에러를 피하기 위해서... 제대로(?) 하려면 다시 봐야할 듯
 
 export default function Chatting(): JSX.Element {
   const [input, setInput, onChangeInput] = useInput("");
   const [messages, setMessages] = useState<message[]>([]);
+  const [nickname, setNickname] = useState<string>("");
 
+  // NOTE: localStorage 닉네임 얻어오기
+  useEffect(() => {
+    let storedNickname = localStorage.getItem("loltoGGNickname");
+
+    if (!storedNickname) {
+      // storedNickname = new Date().getTime().toString(); // 임시
+      storedNickname = makeNickname();
+      localStorage.setItem("loltoGGNickname", storedNickname);
+    }
+
+    setNickname(storedNickname);
+  }, []);
+
+  // NOTE: messages firestore 읽기
   useEffect(() => {
     if (!dbService) return;
 
@@ -41,6 +58,7 @@ export default function Chatting(): JSX.Element {
   const chatMsg = () => {
     addDoc(collection(dbService, "messages"), {
       createdAt: serverTimestamp(),
+      nickname,
       text: input,
     });
   };
@@ -54,7 +72,11 @@ export default function Chatting(): JSX.Element {
     <div>
       <ul>
         {messages.map((val) => {
-          return <li key={val.id}>{val.text}</li>;
+          return (
+            <li key={val.id}>
+              {val.nickname}: {val.text}
+            </li>
+          );
         })}
       </ul>
 
