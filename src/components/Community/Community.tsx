@@ -16,13 +16,13 @@ import {
   limit,
   getDocs,
 } from "firebase/firestore";
-import { async } from "@firebase/util";
 
 interface Post {
   id: string;
   title: string;
   nickname: string;
   time: string;
+  value: string;
 }
 
 function Community(): JSX.Element {
@@ -42,12 +42,13 @@ function Community(): JSX.Element {
           title: doc.data().title,
           nickname: doc.data().userNickname,
           time: doc.data().time,
+          value: doc.data().value,
         });
       });
       setList(items);
     };
     fetchData();
-  }, []);
+  }, [communityRef]);
 
   const showNext = (item: Post) => {
     const fetchNextData = async () => {
@@ -65,6 +66,7 @@ function Community(): JSX.Element {
           title: doc.data().title,
           nickname: doc.data().userNickname,
           time: doc.data().time,
+          value: doc.data().value,
         });
       });
       setList(items);
@@ -119,7 +121,11 @@ function Community(): JSX.Element {
                 <StyledStack column alignItem="center">
                   <StyledStack>
                     <StyledLi
-                      onClick={() => navigate(`/community/${post.id}`)}
+                      onClick={() =>
+                        navigate(`/community/${post.id}`, {
+                          state: { value: post.value },
+                        })
+                      }
                       color={"black"}
                     >
                       {post.title}
