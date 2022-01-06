@@ -4,6 +4,4 @@ const proxy: string = "https://api.allorigins.win/raw?url="; // NOTE: 429 에러
 const url: string = "https://kr.api.riotgames.com/";
 
 export const endpoint: string = proxy + url;
-export const apiKey: string =
-  "?api_key=RGAPI-d59e2b7f-560b-4341-acd0-af137e514760";
-// "?api_key=RGAPI-264e19a2-c4fa-4283-a805-36fcfca3335d"; // TODO: 추후 .env 등을 사용해서 감춰야 할 듯?
+export const apiKey: string = "?api_key=" + process.env.REACT_APP_RIOT_API_KEY;
