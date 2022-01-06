@@ -5,5 +5,5 @@ const url: string = "https://kr.api.riotgames.com/";
 
 export const endpoint: string = proxy + url;
 export const apiKey: string =
-  "?api_key=RGAPI-f244f155-df62-4a74-a681-a16c0a76dbd0";
+  "?api_key=RGAPI-d59e2b7f-560b-4341-acd0-af137e514760";
 // "?api_key=RGAPI-264e19a2-c4fa-4283-a805-36fcfca3335d"; // TODO: 추후 .env 등을 사용해서 감춰야 할 듯?
