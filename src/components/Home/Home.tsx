@@ -52,7 +52,7 @@ function Home(): JSX.Element {
           <StyledButton
             height="40px"
             borderRadius="2px"
-            lineHeight="3.4"
+            lineHeight="3.45555"
             onClick={onClickBtn}
           >
             찾기
@@ -69,7 +69,13 @@ function Home(): JSX.Element {
           강함을 증명하세요.
         </h1>
         <div data-aos="flip-left">table</div>
-        <span id="li-rank" onClick={() => navigate("/rank")}>
+        <span
+          id="li-rank"
+          onClick={() => navigate("/rank")}
+          style={{
+            cursor: "pointer",
+          }}
+        >
           {">"} 자세히 보기
         </span>
       </StyledSection>
@@ -81,7 +87,13 @@ function Home(): JSX.Element {
           margin="10px"
         >
           <h3>커뮤니티.</h3>
-          <span id="li-community" onClick={() => navigate("/community")}>
+          <span
+            id="li-community"
+            onClick={() => navigate("/community")}
+            style={{
+              cursor: "pointer",
+            }}
+          >
             {">"} 시작하기
           </span>
         </StyledSection>
@@ -92,13 +104,21 @@ function Home(): JSX.Element {
           margin="10px"
         >
           <h3>실시간 채팅.</h3>
-          <span id="li-chat" onClick={() => navigate("/chat")}>
+          <span
+            id="li-chat"
+            onClick={() => navigate("/chat")}
+            style={{
+              cursor: "pointer",
+            }}
+          >
             {">"} 시작하기
           </span>
         </StyledSection>
       </StyledStack>
       <StyledSection height="300px">
         <span>만든사람들</span>
+        <a>seohee-choi</a>
+        <a>gua-moon</a>
       </StyledSection>
     </div>
   );

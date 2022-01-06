@@ -4,6 +4,7 @@ import {
   StyledSection,
   StyledLi,
   StyledButton,
+  StyledDivider,
 } from "../../styles/styles.component";
 import { useNavigate } from "react-router";
 import { dbService } from "../../myFirebase";
@@ -97,7 +98,7 @@ function Community(): JSX.Element {
         }}
       ></StyledSection>
 
-      <StyledSection id="section-communityList" height="800px">
+      <StyledSection id="section-communityList" height="700px">
         <StyledButton onClick={() => navigate("/community/NewPostEditor")}>
           글 작성
         </StyledButton>
@@ -107,23 +108,37 @@ function Community(): JSX.Element {
           width="90%"
           style={{ maxWidth: "1200px" }}
         >
-          {list.map((post) => {
-            return (
-              <StyledStack style={{ backgroundColor: "white" }}>
-                <StyledLi
-                  onClick={() => navigate(`/community/${post.id}`)}
-                  color={"black"}
-                >
-                  {post.title}
-                </StyledLi>
-                <StyledLi color={"black"}>{post.nickname}</StyledLi>
-              </StyledStack>
-            );
-          })}
+          <StyledSection id="section-postList" height="500px">
+            <StyledStack>
+              <StyledLi color={"black"}>글 제목 </StyledLi>
+              <StyledLi color={"black"}>닉네임 </StyledLi>
+            </StyledStack>
+            <StyledDivider />
+            {list.map((post) => {
+              return (
+                <StyledStack column alignItem="center">
+                  <StyledStack>
+                    <StyledLi
+                      onClick={() => navigate(`/community/${post.id}`)}
+                      color={"black"}
+                    >
+                      {post.title}
+                    </StyledLi>
+                    <StyledLi color={"black"}>{post.nickname}</StyledLi>
+                  </StyledStack>
+                  <StyledDivider />
+                </StyledStack>
+              );
+            })}
+          </StyledSection>
+
           {list.length < limitNumber ? (
             <div></div>
           ) : (
-            <StyledButton onClick={() => showNext(list[limitNumber - 1])}>
+            <StyledButton
+              style={{ margin: "20px" }}
+              onClick={() => showNext(list[limitNumber - 1])}
+            >
               다음페이지
             </StyledButton>
           )}

@@ -47,6 +47,10 @@ interface StyledStackProps {
   column?: boolean;
 }
 
+export const StyledDivider = styled.div`
+  border: 1px solid #f0f0f0;
+  width: 100%;
+`;
 export const StyledStack = styled.div<StyledStackProps>`
   flex-direction: ${(props) => (props.column ? "column" : "row")};
   display: flex;
