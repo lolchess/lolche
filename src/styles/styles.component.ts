@@ -1,17 +1,34 @@
 import styled from "styled-components";
 
-export const StyledLi = styled.li`
+export const StyledLi = styled.li<{ color?: string }>`
   font-size: 12px;
   line-height: 3.66667;
   font-weight: 400;
-  color: #f5f5f7;
+  color: ${(props) => props.color || "#f5f5f7"};
   position: relative;
   z-index: 1;
   display: inline-block;
   padding: 0 8px;
   height: 44px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   opacity: 0.8;
   cursor: pointer;
+`;
+
+export const StyledButton = styled.div`
+  height: 30px;
+  background-color: #404040;
+  font-size: 12px;
+  padding: 0 10px;
+  cursor: pointer;
+  border-radius: 2em;
+  border: 0;
+  font-weight: 400;
+  line-height: 2.66667;
+  color: #f9f9f9;
 `;
 
 interface StyledStackProps {
