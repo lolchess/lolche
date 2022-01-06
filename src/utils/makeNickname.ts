@@ -32,12 +32,18 @@ export default function makeNickname() {
     "으르렁이",
     "퐁당이",
   ];
+  const third = ["1성", "2성", "3성"];
 
   const getRandomIdx = (array: string[]) => {
     return Math.floor(Math.random() * array.length);
   };
 
-  const ret = first[getRandomIdx(first)] + " " + second[getRandomIdx(second)];
+  const ret =
+    first[getRandomIdx(first)] +
+    " " +
+    second[getRandomIdx(second)] +
+    " " +
+    third[getRandomIdx(third)];
 
   return ret.trim();
 }

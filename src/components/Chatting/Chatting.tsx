@@ -43,7 +43,7 @@ export default function Chatting(): JSX.Element {
     const q = query(
       collection(dbService, "messages"),
       orderBy("createdAt"),
-      limitToLast(10) // NOTE: 현재는 테스트를 위해 10개만 보이도록... 실제로는 채팅 줄 수에 따라 변경하면 될 듯
+      limitToLast(100) // NOTE: 현재는 100개만 보이도록 설정... 추후 변경 가능
     );
 
     onSnapshot(q, (querySnapshot) => {
