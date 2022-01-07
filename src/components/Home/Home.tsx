@@ -4,11 +4,17 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import {
   StyledStack,
+  StyledTh,
+  StyledTd,
+  StyledTr,
   StyledSection,
   StyledButton,
 } from "../../styles/styles.component";
 import { useNavigate } from "react-router";
 import useInput from "../../hooks/useInput";
+import { getLeagueByChallenger } from "../../apis/getLeagueByChallenger";
+import { LeagueItemDTO } from "../../models/LeagueItemDTO";
+import { LeagueListDTO } from "../../models/LeagueListDTO";
 
 const StyledHomeInput = styled.input`
   padding: 3px 10px;
@@ -20,13 +26,7 @@ const StyledHomeInput = styled.input`
   border: 2px solid #bbb;
   border-radius: 1px;
   display: inline-block;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-transition: 0.2s ease all;
-  -moz-transition: 0.2s ease all;
-  -ms-transition: 0.2s ease all;
-  -o-transition: 0.2s ease all;
   transition: 0.2s ease all;
 `;
 function Home(): JSX.Element {
@@ -41,6 +41,63 @@ function Home(): JSX.Element {
     setInput("");
   };
 
+  const RankTable = () => {
+    const [list, setList] = useState<null | LeagueItemDTO[]>(null);
+
+    useEffect(() => {
+      const getRank = async () => {
+        const challenger: LeagueListDTO = await getLeagueByChallenger();
+        setList(
+          challenger.entries.sort((a, b) => b.leaguePoints - a.leaguePoints)
+        );
+      };
+
+      getRank();
+    }, []);
+
+    return (
+      <StyledSection
+        height="300px"
+        justifyContent="flex-start"
+        style={{
+          overflow: "scroll",
+          overflowX: "hidden",
+        }}
+        data-aos="flip-left"
+      >
+        <table
+          style={{
+            minWidth: "100%",
+          }}
+        >
+          <thead>
+            <tr>
+              <StyledTh>순위</StyledTh>
+              <StyledTh>
+                <h3>소환사명</h3>
+              </StyledTh>
+              <StyledTh>
+                <h3>LP</h3>
+              </StyledTh>
+            </tr>
+          </thead>
+          <tbody>
+            {list &&
+              list.map((val, index) => {
+                return (
+                  <StyledTr key={val.summonerId}>
+                    <StyledTd>{index + 1}</StyledTd>
+
+                    <StyledTd style={{}}>{val.summonerName}</StyledTd>
+                    <StyledTd> {val.leaguePoints} </StyledTd>
+                  </StyledTr>
+                );
+              })}
+          </tbody>
+        </table>
+      </StyledSection>
+    );
+  };
   return (
     <div>
       <StyledSection id="section-homeSearch" color="#f5f5f5" height="600px">
@@ -68,7 +125,7 @@ function Home(): JSX.Element {
         <h1 data-aos="fade-up" data-aos-delay="300">
           강함을 증명하세요.
         </h1>
-        <div data-aos="flip-left">table</div>
+        <RankTable></RankTable>
         <span
           id="li-rank"
           onClick={() => navigate("/rank")}

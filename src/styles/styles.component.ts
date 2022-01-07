@@ -83,3 +83,40 @@ export const StyledSection = styled.section<StyledSectionProps>`
   padding: ${(props) => props.padding || "0"};
   height: ${(props) => props.height || "500px"};
 `;
+
+export const StyledInput = styled.input`
+  padding: 3px 10px;
+  width: 80%;
+  height: 30px;
+  margin: 5px 5px;
+  font-size: 15px;
+  max-width: 300px;
+  outline: none;
+  border: 1px solid #bbb;
+  border-radius: 1px;
+  display: inline-block;
+  box-sizing: border-box;
+  transition: 0.2s ease all;
+`;
+export const StyledTh = styled.th`
+  padding: 10px 10px;
+  font-size: 15px;
+`;
+export const StyledTd = styled.td`
+  padding: 10px 10px;
+  font-size: 15px;
+`;
+export const StyledTr = styled.tr`
+  &:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  &:hover {
+    background-color: #e6e6e6;
+    transform: translate3d(6px, -6px, 0);
+
+    transition-delay: 0s;
+    transition-duration: 0.4s;
+    transition-property: all;
+    transition-timing-function: line;
+  }
+`;

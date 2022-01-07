@@ -48,7 +48,7 @@ function Community(): JSX.Element {
       setList(items);
     };
     fetchData();
-  }, [communityRef]);
+  }, []);
 
   const showNext = (item: Post) => {
     const fetchNextData = async () => {

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import TestEditorForm from "./PostEditor";
 import {
   StyledButton,
-  StyledStack,
+  StyledInput,
   StyledSection,
+  StyledStack,
 } from "../../../styles/styles.component";
 import { useNavigate } from "react-router";
 import { addDoc, collection } from "firebase/firestore";
@@ -49,25 +50,25 @@ function NewPostEditor(): JSX.Element {
 
   return (
     <StyledSection height="900px">
-      <form action=" ">
-        <input
+      <StyledStack justifyContent="center">
+        <StyledInput
           onChange={handleChange}
           id="community-newPost-title"
           name="title"
           type="text"
           placeholder="제목"
         />
-        <input
+        <StyledInput
           onChange={handleChange}
           id="community-newPost-nickname"
           name="nickname"
           type="text"
           placeholder="닉네임"
         />
-      </form>
+      </StyledStack>
 
       <TestEditorForm setEditorValue={setEditorValue} />
-      <input
+      <StyledInput
         onChange={handleChange}
         id="community-newPost-password"
         name="password"

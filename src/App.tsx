@@ -4,7 +4,6 @@ import Post from "./components/Community/Post";
 import NewPostEditor from "./components/Community/Editor";
 import Navigation from "./components/Navigation";
 import Home from "./components/Home";
-import Rank from "./components/Rank";
 import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import RankTable from "./components/RankTable";
@@ -22,7 +21,7 @@ function App() {
         <Route path="/UserPage/:name" element={<UserPage />} />
         <Route path="/Chatting" element={<Chatting />} />
         <Route path="/community/:postId" element={<Post />} />
-        <Route path="/rank" element={<Rank />} />
+        <Route path="/rank" element={<RankTable />} />
       </Routes>
     </BrowserRouter>
   );
