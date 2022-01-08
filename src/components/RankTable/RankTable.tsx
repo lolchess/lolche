@@ -10,18 +10,17 @@ import {
 } from "../../styles/styles.component";
 import styled from "styled-components";
 
-const StyledBox = styled.div`
-  padding: 20px;
-  font-size: 20px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  left: 0;
-`;
 function RankTable(): JSX.Element {
   const [list, setList] = useState<null | LeagueItemDTO[]>(null);
-
+  const StyledBox = styled.div`
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    left: 0;
+  `;
   useEffect(() => {
     const getRank = async () => {
       const challenger: LeagueListDTO = await getLeagueByChallenger();

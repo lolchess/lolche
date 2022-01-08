@@ -57,11 +57,11 @@ function Home(): JSX.Element {
 
     return (
       <StyledSection
-        height="300px"
+        height="270px"
         justifyContent="flex-start"
         style={{
-          overflow: "scroll",
-          overflowX: "hidden",
+          // overflow: "scroll",
+          overflow: "hidden",
         }}
         data-aos="flip-left"
       >

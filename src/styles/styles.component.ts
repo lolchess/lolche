@@ -120,3 +120,21 @@ export const StyledTr = styled.tr`
     transition-timing-function: line;
   }
 `;
+export const StyledCard = styled.div`
+  width: 300px;
+  height: 300px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(0deg, #1b1b1b, #222, #1b1b1b);
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  text-align: center;
+  margin: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+`;
+export const CardText = styled.h2`
+  color: #f5f5f5;
+`;
