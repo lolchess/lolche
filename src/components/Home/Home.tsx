@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -117,8 +116,10 @@ function Home(): JSX.Element {
       </StyledStack>
       <StyledSection height="300px">
         <span>만든사람들</span>
-        <a>seohee-choi</a>
-        <a>gua-moon</a>
+        {/* <a>seohee-choi</a> */}
+        <span>seohee-choi</span>
+        {/* <a>gua-moon</a> */}
+        <span>gua-moon</span>
       </StyledSection>
     </div>
   );

@@ -27,7 +27,8 @@ function TestEditorForm({ setEditorValue }: TestEditorFormProps): JSX.Element {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   useEffect(() => {
     setEditorValue(draftToHtml(convertToRaw(editorState.getCurrentContent())));
-  }, [editorState]);
+    // }, [editorState]);
+  }); // NOTE: 에러 문구 삭제를 위한 임시 처리. 문제가 생길시 다시 봐야...
 
   const onEditorStateChange = (editorState: EditorState) => {
     // editorState에 값 설정
