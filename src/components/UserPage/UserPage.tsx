@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getSummonerByName } from "../../apis/getSummonerByName";
 import {
   StyledStack,
   StyledSection,
-  StyledLi,
   StyledCard,
   CardText,
 } from "../../styles/styles.component";
-import styled from "styled-components";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -30,24 +28,30 @@ export default function UserPage(): JSX.Element {
     rate: CIRCUMFERENCE,
   });
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (userData) {
       setPercent({
         rate: CIRCUMFERENCE * (1 - userData.wins / userData.losses),
       });
     }
-  }, [userData]);
+  }, [userData, CIRCUMFERENCE]);
 
   useEffect(() => {
     const getSummoner = async () => {
       if (!name) return;
 
-      const [data] = await getSummonerByName(name);
-      setUserData(data);
+      try {
+        const [data] = await getSummonerByName(name);
+        setUserData(data);
+      } catch (e) {
+        navigate("/UserPageError");
+      }
     };
 
     getSummoner();
-  }, [name]);
+  }, [name, navigate]);
 
   return (
     <StyledStack column alignItem="center" height="100%">

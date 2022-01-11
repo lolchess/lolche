@@ -9,6 +9,7 @@ import { Route, Routes } from "react-router-dom";
 import RankTable from "./components/RankTable";
 import UserPage from "./components/UserPage";
 import Chatting from "./components/Chatting";
+import UserPageError from "./components/UserPageError";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/Chatting" element={<Chatting />} />
         <Route path="/community/:postId" element={<Post />} />
         <Route path="/rank" element={<RankTable />} />
+        <Route path="/UserPageError" element={<UserPageError />} />
       </Routes>
     </BrowserRouter>
   );
