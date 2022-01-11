@@ -104,7 +104,7 @@ export default function Chatting(): JSX.Element {
 }
 
 const Container = styled.div`
-  width: calc(100vw - 20px * 2);
+  width: calc(100% - 20px * 2);
   height: calc(100vh - 44px - 20px * 2);
   /* border: 1px solid grey; */
   padding: 20px;
@@ -114,6 +114,7 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: column;
+  /* box-sizing: border-box; */
 `;
 
 const StyledUl = styled.ul`
