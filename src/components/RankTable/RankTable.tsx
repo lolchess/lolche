@@ -9,6 +9,7 @@ import {
   StyledSection,
 } from "../../styles/styles.component";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const StyledBox = styled.div`
   padding: 20px;
@@ -20,6 +21,8 @@ const StyledBox = styled.div`
   left: 0;
 `;
 function RankTable(): JSX.Element {
+  const navigate = useNavigate();
+
   const [list, setList] = useState<null | LeagueItemDTO[]>(null);
 
   useEffect(() => {
@@ -60,9 +63,13 @@ function RankTable(): JSX.Element {
             {list &&
               list.map((val, index) => {
                 return (
-                  <StyledTr key={val.summonerId}>
+                  <StyledTr
+                    key={val.summonerId}
+                    onClick={() => {
+                      navigate("/UserPage/" + val.summonerName);
+                    }}
+                  >
                     <StyledTd>{index + 1}</StyledTd>
-
                     <StyledTd style={{}}>{val.summonerName}</StyledTd>
                     <StyledTd> {val.leaguePoints} </StyledTd>
                   </StyledTr>
