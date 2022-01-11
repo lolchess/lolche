@@ -114,11 +114,6 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-
-  /* &::-webkit-scrollbar {
-    background-color: red;
-    width: 100px;
-  } */
 `;
 
 const StyledUl = styled.ul`
@@ -128,6 +123,17 @@ const StyledUl = styled.ul`
   overflow-y: scroll;
   margin: 0 0 10px 0;
   padding: 0;
+
+  &::-webkit-scrollbar {
+    background-color: lightgray;
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #acacac;
+    border-radius: 10px;
+    /* width: 100px; */
+  }
 `;
 
 const InputContainer = styled.div`
