@@ -11,6 +11,10 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+
+  html {
+    overflow-y: scroll;
+  }
 `;
 
 export default GlobalStyle;
