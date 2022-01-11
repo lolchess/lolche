@@ -106,13 +106,19 @@ export default function Chatting(): JSX.Element {
 const Container = styled.div`
   width: calc(100vw - 20px * 2);
   height: calc(100vh - 44px - 20px * 2);
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   padding: 20px;
   margin: 20px;
   background-color: #dcdcdc;
+  border-radius: 10px;
 
   display: flex;
   flex-direction: column;
+
+  /* &::-webkit-scrollbar {
+    background-color: red;
+    width: 100px;
+  } */
 `;
 
 const StyledUl = styled.ul`

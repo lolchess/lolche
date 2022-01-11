@@ -16,7 +16,6 @@ import {
   limit,
   getDocs,
 } from "firebase/firestore";
-import { async } from "@firebase/util";
 
 interface Post {
   id: string;
@@ -47,7 +46,8 @@ function Community(): JSX.Element {
       setList(items);
     };
     fetchData();
-  }, []);
+    // }, []);
+  }); // NOTE: 에러때문에 일단 이렇게 처리
 
   const showNext = (item: Post) => {
     const fetchNextData = async () => {
