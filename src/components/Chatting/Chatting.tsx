@@ -48,13 +48,15 @@ export default function Chatting(): JSX.Element {
       limitToLast(100) // NOTE: 현재는 100개만 보이도록 설정... 추후 변경 가능
     );
 
-    onSnapshot(q, (querySnapshot) => {
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const data = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
       setMessages(data);
     });
+
+    return unsubscribe; // NOTE: 이걸 안해서 비정상적으로 많이 읽어졌나?
   }, []);
 
   useEffect(() => {
