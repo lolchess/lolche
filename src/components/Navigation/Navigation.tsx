@@ -23,17 +23,21 @@ function Navigation(): JSX.Element {
   return (
     <StyledHeader id="header-nav">
       <StyledNav id="ul-nav">
-        <Logo onClick={() => navigate("/")}>loltoGG</Logo>
-        {/* <StyledLi id="li-home">home</StyledLi> */}
-        <StyledLi id="li-rank" onClick={() => navigate("/rank")}>
-          순위표
-        </StyledLi>
-        <StyledLi id="li-community" onClick={() => navigate("/community")}>
-          커뮤니티
-        </StyledLi>
-        <StyledLi id="li-chat" onClick={() => navigate("/Chatting")}>
-          채팅
-        </StyledLi>
+        <MenuContainer>
+          <Logo onClick={() => navigate("/")}>loltoGG</Logo>
+          {/* <StyledLi id="li-home">home</StyledLi> */}
+          <LiContainer>
+            <StyledLi id="li-rank" onClick={() => navigate("/rank")}>
+              순위표
+            </StyledLi>
+            <StyledLi id="li-community" onClick={() => navigate("/community")}>
+              커뮤니티
+            </StyledLi>
+            <StyledLi id="li-chat" onClick={() => navigate("/Chatting")}>
+              채팅
+            </StyledLi>
+          </LiContainer>
+        </MenuContainer>
 
         <InputContainer>
           <StyledInput2
@@ -61,7 +65,7 @@ const StyledHeader = styled.header`
 
 const StyledNav = styled.ul`
   cursor: default;
-  margin: 0;
+  margin: auto;
   width: auto;
   height: 50px;
   display: flex;
@@ -72,16 +76,30 @@ const StyledNav = styled.ul`
   list-style: none;
 `;
 
+const MenuContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const LiContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 200px;
+  /* background-color: red; */
+`;
+
 const Logo = styled.span`
   /* font-family: "SongMyung"; */
   font-family: "OrelegaOne";
   font-size: 27px;
   cursor: pointer;
+  margin: 0 50px 0 0;
 `;
 
 const InputContainer = styled.div`
   width: 250px;
-  height: 33px;
+  height: 30px;
   background-color: white;
   display: flex;
   justify-content: space-between;

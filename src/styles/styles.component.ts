@@ -1,20 +1,20 @@
 import styled from "styled-components";
 
 export const StyledLi = styled.li<{ color?: string }>`
-  font-size: 12px;
-  line-height: 3.66667;
-  font-weight: 400;
+  /* font-size: 12px; */
+  /* line-height: 3.66667; */
+  /* font-weight: 400; */
+
+  font-size: 13px;
+  margin: auto;
   color: ${(props) => props.color || "#f5f5f7"};
   position: relative;
   z-index: 1;
   display: inline-block;
   padding: 0 8px;
-  height: 44px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
-  opacity: 0.8;
   cursor: pointer;
 `;
 
