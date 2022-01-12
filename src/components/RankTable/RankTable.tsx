@@ -67,6 +67,9 @@ function RankTable(): JSX.Element {
                     onClick={() => {
                       navigate("/UserPage/" + val.summonerName);
                     }}
+                    style={{
+                      cursor: "pointer",
+                    }}
                   >
                     <StyledTd>{index + 1}</StyledTd>
                     <StyledTd style={{}}>{val.summonerName}</StyledTd>
