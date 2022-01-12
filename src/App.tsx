@@ -9,22 +9,29 @@ import { Route, Routes } from "react-router-dom";
 import RankTable from "./components/RankTable";
 import UserPage from "./components/UserPage";
 import Chatting from "./components/Chatting";
+import styled from "styled-components";
 
 function App() {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Navigation />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/community" element={<Community />} />
-        <Route path="/community/NewPostEditor" element={<NewPostEditor />} />
-        <Route path="/UserPage/:name" element={<UserPage />} />
-        <Route path="/Chatting" element={<Chatting />} />
-        <Route path="/community/:postId" element={<Post />} />
-        <Route path="/rank" element={<RankTable />} />
-      </Routes>
-    </BrowserRouter>
+    <StyledDiv>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/community/NewPostEditor" element={<NewPostEditor />} />
+          <Route path="/UserPage/:name" element={<UserPage />} />
+          <Route path="/Chatting" element={<Chatting />} />
+          <Route path="/community/:postId" element={<Post />} />
+          <Route path="/rank" element={<RankTable />} />
+        </Routes>
+      </BrowserRouter>
+    </StyledDiv>
   );
 }
+
+const StyledDiv = styled.div`
+  font-family: "NOTO Sans KR Thin";
+`;
 
 export default App;

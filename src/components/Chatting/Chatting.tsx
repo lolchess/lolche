@@ -106,7 +106,6 @@ export default function Chatting(): JSX.Element {
 const Container = styled.div`
   width: calc(100% - 20px * 2);
   height: calc(100vh - 44px - 20px * 2);
-  /* border: 1px solid grey; */
   padding: 20px;
   margin: 20px;
   background-color: #dcdcdc;
@@ -114,13 +113,11 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  /* box-sizing: border-box; */
 `;
 
 const StyledUl = styled.ul`
   height: calc(100% - 45px - 10px);
   list-style: none;
-  /* background-color: yellow; */
   overflow-y: scroll;
   margin: 0 0 10px 0;
   padding: 0;
@@ -133,7 +130,6 @@ const StyledUl = styled.ul`
   &::-webkit-scrollbar-thumb {
     background-color: #acacac;
     border-radius: 10px;
-    /* width: 100px; */
   }
 `;
 
