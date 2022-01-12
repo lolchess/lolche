@@ -1,19 +1,21 @@
 import styled from "styled-components";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import {
-  StyledStack,
-  StyledTh,
-  StyledTd,
-  StyledTr,
-  StyledSection,
-  StyledButton,
-} from "../../styles/styles.component";
+
 import { useNavigate } from "react-router";
 import useInput from "../../hooks/useInput";
 import { getLeagueByChallenger } from "../../apis/getLeagueByChallenger";
 import { LeagueItemDTO } from "../../models/LeagueItemDTO";
 import { LeagueListDTO } from "../../models/LeagueListDTO";
+import { useEffect, useState } from "react";
+import {
+  StyledButton,
+  StyledSection,
+  StyledStack,
+  StyledTd,
+  StyledTr,
+} from "../../styles/styles.component";
+import { StyledTh } from "../../styles/styles.component";
 
 const StyledHomeInput = styled.input`
   padding: 3px 10px;
