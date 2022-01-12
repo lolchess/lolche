@@ -2,8 +2,27 @@ import { useEffect, useState } from "react";
 import { getLeagueByChallenger } from "../../apis/getLeagueByChallenger";
 import { LeagueItemDTO } from "../../models/LeagueItemDTO";
 import { LeagueListDTO } from "../../models/LeagueListDTO";
+import {
+  StyledTh,
+  StyledTd,
+  StyledTr,
+  StyledSection,
+} from "../../styles/styles.component";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
+const StyledBox = styled.div`
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 0;
+`;
 function RankTable(): JSX.Element {
+  const navigate = useNavigate();
+
   const [list, setList] = useState<null | LeagueItemDTO[]>(null);
 
   useEffect(() => {
@@ -19,14 +38,46 @@ function RankTable(): JSX.Element {
 
   return (
     <div>
-      {list &&
-        list.map((val) => {
-          return (
-            <div key={val.summonerId}>
-              소환사명: {val.summonerName} LP: {val.leaguePoints}
-            </div>
-          );
-        })}
+      <StyledSection height="400px" color="#f5f5f5">
+        <h1>뭔가 멋진 말.</h1>
+      </StyledSection>
+      <StyledBox>
+        <table
+          id="container"
+          style={{
+            width: "700px",
+          }}
+        >
+          <thead>
+            <tr>
+              <StyledTh>순위</StyledTh>
+              <StyledTh>
+                <h3>소환사명</h3>
+              </StyledTh>
+              <StyledTh>
+                <h3>LP</h3>
+              </StyledTh>
+            </tr>
+          </thead>
+          <tbody>
+            {list &&
+              list.map((val, index) => {
+                return (
+                  <StyledTr
+                    key={val.summonerId}
+                    onClick={() => {
+                      navigate("/UserPage/" + val.summonerName);
+                    }}
+                  >
+                    <StyledTd>{index + 1}</StyledTd>
+                    <StyledTd style={{}}>{val.summonerName}</StyledTd>
+                    <StyledTd> {val.leaguePoints} </StyledTd>
+                  </StyledTr>
+                );
+              })}
+          </tbody>
+        </table>
+      </StyledBox>
     </div>
   );
 }
