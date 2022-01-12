@@ -10,6 +10,7 @@ import RankTable from "./components/RankTable";
 import UserPage from "./components/UserPage";
 import Chatting from "./components/Chatting";
 import styled from "styled-components";
+import UserPageError from "./components/UserPageError";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/Chatting" element={<Chatting />} />
           <Route path="/community/:postId" element={<Post />} />
           <Route path="/rank" element={<RankTable />} />
+          <Route path="/UserPageError" element={<UserPageError />} />
         </Routes>
       </BrowserRouter>
     </StyledDiv>

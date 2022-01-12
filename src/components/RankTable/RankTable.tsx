@@ -11,20 +11,19 @@ import {
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-const StyledBox = styled.div`
-  padding: 20px;
-  font-size: 20px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  left: 0;
-`;
 function RankTable(): JSX.Element {
   const navigate = useNavigate();
 
   const [list, setList] = useState<null | LeagueItemDTO[]>(null);
-
+  const StyledBox = styled.div`
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    left: 0;
+  `;
   useEffect(() => {
     const getRank = async () => {
       const challenger: LeagueListDTO = await getLeagueByChallenger();
@@ -67,6 +66,9 @@ function RankTable(): JSX.Element {
                     key={val.summonerId}
                     onClick={() => {
                       navigate("/UserPage/" + val.summonerName);
+                    }}
+                    style={{
+                      cursor: "pointer",
                     }}
                   >
                     <StyledTd>{index + 1}</StyledTd>
