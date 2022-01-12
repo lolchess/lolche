@@ -1,13 +1,15 @@
 {
   "files": {
     "main.css": "/loltoGG/static/css/main.e9187312.css",
-    "main.js": "/loltoGG/static/js/main.cb176886.js",
+    "main.js": "/loltoGG/static/js/main.91ce029d.js",
+    "static/media/SongMyung-Regular.woff": "/loltoGG/static/media/SongMyung-Regular.6bad4d5998d702f1d930.woff",
+    "static/media/NotoSansKR-Thin.woff": "/loltoGG/static/media/NotoSansKR-Thin.cbaf7ec3952c5b6c7699.woff",
     "index.html": "/loltoGG/index.html",
     "main.e9187312.css.map": "/loltoGG/static/css/main.e9187312.css.map",
-    "main.cb176886.js.map": "/loltoGG/static/js/main.cb176886.js.map"
+    "main.91ce029d.js.map": "/loltoGG/static/js/main.91ce029d.js.map"
   },
   "entrypoints": [
     "static/css/main.e9187312.css",
-    "static/js/main.cb176886.js"
+    "static/js/main.91ce029d.js"
   ]
 }
