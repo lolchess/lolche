@@ -105,7 +105,7 @@ export default function Chatting(): JSX.Element {
 
 const Container = styled.div`
   width: calc(100% - 20px * 2);
-  height: calc(100vh - 44px - 20px * 2);
+  height: calc(100vh - 50px - 20px * 2);
   padding: 20px;
   margin: 20px;
   background-color: #dcdcdc;
@@ -116,7 +116,7 @@ const Container = styled.div`
 `;
 
 const StyledUl = styled.ul`
-  height: calc(100% - 45px - 10px);
+  height: calc(100% - 50px - 10px);
   list-style: none;
   overflow-y: scroll;
   margin: 0 0 10px 0;

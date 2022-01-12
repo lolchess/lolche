@@ -15,7 +15,7 @@ const StyledHeader = styled.header`
   text-align: center;
   left: 0;
   width: 100%;
-  height: 40px;
+  height: 50px;
   z-index: 9998;
 `;
 
@@ -23,7 +23,7 @@ const StyledNav = styled.ul`
   cursor: default;
   margin: 0;
   width: auto;
-  height: 44px;
+  height: 50px;
   display: flex;
   padding: 0 82px;
   justify-content: space-between;
@@ -46,10 +46,8 @@ function Navigation(): JSX.Element {
   return (
     <StyledHeader id="header-nav">
       <StyledNav id="ul-nav">
-        <Logo>loltoGG</Logo>
-        <StyledLi id="li-home" onClick={() => navigate("/")}>
-          home
-        </StyledLi>
+        <Logo onClick={() => navigate("/")}>loltoGG</Logo>
+        {/* <StyledLi id="li-home">home</StyledLi> */}
         <StyledLi id="li-rank" onClick={() => navigate("/rank")}>
           순위표
         </StyledLi>
@@ -72,7 +70,8 @@ function Navigation(): JSX.Element {
 const Logo = styled.span`
   /* font-family: "SongMyung"; */
   font-family: "OrelegaOne";
-  font-size: 25px;
+  font-size: 27px;
+  cursor: pointer;
 `;
 
 export default Navigation;

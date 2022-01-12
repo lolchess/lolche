@@ -51,10 +51,12 @@ export const StyledDivider = styled.div`
   border: 1px solid #f0f0f0;
   width: 100%;
 `;
+
 export const StyledStack = styled.div<StyledStackProps>`
   flex-direction: ${(props) => (props.column ? "column" : "row")};
   display: flex;
-  align-items: ${(props) => props.alignItem || "space-between"};
+  /* align-items: ${(props) => props.alignItem || "space-between"}; */
+  align-items: ${(props) => props.alignItem || "center"};
   justify-content: ${(props) => props.justifyContent || "space-between"};
   height: ${(props) => props.height || ""};
   width: ${(props) => props.width || "100%"};
@@ -93,7 +95,7 @@ export const StyledInput = styled.input`
   max-width: 300px;
   outline: none;
   border: 1px solid #bbb;
-  border-radius: 1px;
+  border-radius: 15px;
   display: inline-block;
   box-sizing: border-box;
   transition: 0.2s ease all;
