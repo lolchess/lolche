@@ -6,13 +6,13 @@ import Navigation from "./components/Navigation";
 import Home from "./components/Home";
 import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
-import RankTable from "./components/RankTable";
+// import RankTable from "./components/RankTable";
 import UserPage from "./components/UserPage";
 import Chatting from "./components/Chatting";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />

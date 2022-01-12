@@ -7,7 +7,8 @@ import {
   query,
   serverTimestamp,
 } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
 import useInput from "../../hooks/useInput";
 import { dbService } from "../../myFirebase";
 import makeNickname from "../../utils/makeNickname";
@@ -22,6 +23,7 @@ export default function Chatting(): JSX.Element {
   const [input, setInput, onChangeInput] = useInput("");
   const [messages, setMessages] = useState<message[]>([]);
   const [nickname, setNickname] = useState<string>("");
+  const messagesEndRef = useRef<null | HTMLDivElement>(null);
 
   // NOTE: localStorage 닉네임 얻어오기
   useEffect(() => {
@@ -55,33 +57,107 @@ export default function Chatting(): JSX.Element {
     });
   }, []);
 
-  const chatMsg = () => {
+  useEffect(() => {
+    // messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView();
+  }, [messages]);
+
+  const sendMessage = () => {
     addDoc(collection(dbService, "messages"), {
       createdAt: serverTimestamp(),
       nickname,
       text: input,
     });
-  };
-
-  const onClickBtn = async () => {
-    await chatMsg();
     setInput("");
   };
 
+  const onKeyPress = async (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter") {
+      await sendMessage();
+    }
+  };
+
   return (
-    <div>
-      <ul>
+    <Container>
+      <StyledUl>
         {messages.map((val) => {
           return (
             <li key={val.id}>
-              {val.nickname}: {val.text}
+              <b>{val.nickname}</b>: {val.text}
             </li>
           );
         })}
-      </ul>
+        <div ref={messagesEndRef} />
+      </StyledUl>
 
-      <input value={input} onChange={onChangeInput} />
-      <button onClick={onClickBtn}>채팅</button>
-    </div>
+      <InputContainer>
+        <StyledInput
+          value={input}
+          onChange={onChangeInput}
+          onKeyPress={onKeyPress}
+        />
+        <StyledIcon className="fas fa-paper-plane" onClick={sendMessage} />
+        {/* <button onClick={onClickBtn}>채팅</button> */}
+      </InputContainer>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  width: calc(100% - 20px * 2);
+  height: calc(100vh - 44px - 20px * 2);
+  /* border: 1px solid grey; */
+  padding: 20px;
+  margin: 20px;
+  background-color: #dcdcdc;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  /* box-sizing: border-box; */
+`;
+
+const StyledUl = styled.ul`
+  height: calc(100% - 45px - 10px);
+  list-style: none;
+  /* background-color: yellow; */
+  overflow-y: scroll;
+  margin: 0 0 10px 0;
+  padding: 0;
+
+  &::-webkit-scrollbar {
+    background-color: lightgray;
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #acacac;
+    border-radius: 10px;
+    /* width: 100px; */
+  }
+`;
+
+const InputContainer = styled.div`
+  height: 45px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  border-radius: 10px;
+`;
+
+const StyledInput = styled.input`
+  height: 80%;
+  width: calc(95%);
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const StyledIcon = styled.i`
+  font-size: 23px;
+  cursor: pointer;
+`;

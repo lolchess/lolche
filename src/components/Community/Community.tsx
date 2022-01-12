@@ -48,7 +48,8 @@ function Community(): JSX.Element {
       setList(items);
     };
     fetchData();
-  }, []);
+    // }, []);
+  }); // NOTE: 에러때문에 일단 이렇게 처리
 
   const showNext = (item: Post) => {
     const fetchNextData = async () => {

@@ -5,6 +5,7 @@ import {
   StyledStack,
   StyledInput,
 } from "../../styles/styles.component";
+
 import useInput from "../../hooks/useInput";
 
 const StyledHeader = styled.header`
@@ -54,7 +55,7 @@ function Navigation(): JSX.Element {
         <StyledLi id="li-community" onClick={() => navigate("/community")}>
           커뮤니티
         </StyledLi>
-        <StyledLi id="li-chat" onClick={() => navigate("/chat")}>
+        <StyledLi id="li-chat" onClick={() => navigate("/Chatting")}>
           채팅
         </StyledLi>
 
