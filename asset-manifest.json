@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/loltoGG/static/css/main.e9187312.css",
-    "main.js": "/loltoGG/static/js/main.341236ca.js",
+    "main.js": "/loltoGG/static/js/main.cb176886.js",
     "index.html": "/loltoGG/index.html",
     "main.e9187312.css.map": "/loltoGG/static/css/main.e9187312.css.map",
-    "main.341236ca.js.map": "/loltoGG/static/js/main.341236ca.js.map"
+    "main.cb176886.js.map": "/loltoGG/static/js/main.cb176886.js.map"
   },
   "entrypoints": [
     "static/css/main.e9187312.css",
-    "static/js/main.341236ca.js"
+    "static/js/main.cb176886.js"
   ]
 }
