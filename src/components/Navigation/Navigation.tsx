@@ -46,6 +46,7 @@ function Navigation(): JSX.Element {
   return (
     <StyledHeader id="header-nav">
       <StyledNav id="ul-nav">
+        <Logo>loltoGG</Logo>
         <StyledLi id="li-home" onClick={() => navigate("/")}>
           home
         </StyledLi>
@@ -67,5 +68,11 @@ function Navigation(): JSX.Element {
     </StyledHeader>
   );
 }
+
+const Logo = styled.span`
+  /* font-family: "SongMyung"; */
+  font-family: "OrelegaOne";
+  font-size: 25px;
+`;
 
 export default Navigation;
