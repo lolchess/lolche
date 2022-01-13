@@ -120,7 +120,8 @@ const Container = styled.div`
 const StyledUl = styled.ul`
   height: calc(100% - 50px - 10px);
   list-style: none;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
+  overflow-y: auto;
   margin: 0 0 10px 0;
   padding: 0;
 
