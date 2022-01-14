@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCodeBranch } from "@fortawesome/free-solid-svg-icons";
 
 import { useNavigate } from "react-router";
 import useInput from "../../hooks/useInput";
@@ -14,6 +16,8 @@ import {
   StyledStack,
   StyledTd,
   StyledTr,
+  StyledSpan,
+  A,
 } from "../../styles/styles.component";
 import { StyledTh } from "../../styles/styles.component";
 
@@ -173,12 +177,18 @@ function Home(): JSX.Element {
           </span>
         </StyledSection>
       </StyledStack>
-      <StyledSection height="300px">
-        <span>만든사람들</span>
-        {/* <a>seohee-choi</a> */}
-        <span>seohee-choi</span>
-        {/* <a>gua-moon</a> */}
-        <span>gua-moon</span>
+      <StyledSection height="300px" color="#202020">
+        <StyledSpan>만든사람들</StyledSpan>
+        <A href="https://github.com/seohee-choi">
+          <StyledSpan>
+            <FontAwesomeIcon icon={faCodeBranch} /> seohee-choi
+          </StyledSpan>
+        </A>
+        <A href="https://github.com/moon9ua">
+          <StyledSpan>
+            <FontAwesomeIcon icon={faCodeBranch} /> gua-moon
+          </StyledSpan>
+        </A>
       </StyledSection>
     </div>
   );

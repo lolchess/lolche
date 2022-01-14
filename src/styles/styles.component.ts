@@ -138,3 +138,11 @@ export const StyledCard = styled.div`
 export const CardText = styled.h2`
   color: #f5f5f5;
 `;
+
+export const StyledSpan = styled.span`
+  color: #f5f5f5;
+  font-size: 15px;
+`;
+export const A = styled.a`
+  text-decoration: none;
+`;
