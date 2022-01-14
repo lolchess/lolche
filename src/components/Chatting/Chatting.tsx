@@ -48,13 +48,15 @@ export default function Chatting(): JSX.Element {
       limitToLast(100) // NOTE: 현재는 100개만 보이도록 설정... 추후 변경 가능
     );
 
-    onSnapshot(q, (querySnapshot) => {
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const data = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
       setMessages(data);
     });
+
+    return unsubscribe; // NOTE: 이걸 안해서 비정상적으로 많이 읽어졌나?
   }, []);
 
   useEffect(() => {
@@ -105,8 +107,7 @@ export default function Chatting(): JSX.Element {
 
 const Container = styled.div`
   width: calc(100% - 20px * 2);
-  height: calc(100vh - 44px - 20px * 2);
-  /* border: 1px solid grey; */
+  height: calc(100vh - 50px - 20px * 2);
   padding: 20px;
   margin: 20px;
   background-color: #dcdcdc;
@@ -114,14 +115,13 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  /* box-sizing: border-box; */
 `;
 
 const StyledUl = styled.ul`
-  height: calc(100% - 45px - 10px);
+  height: calc(100% - 50px - 10px);
   list-style: none;
-  /* background-color: yellow; */
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
+  overflow-y: auto;
   margin: 0 0 10px 0;
   padding: 0;
 
@@ -133,7 +133,6 @@ const StyledUl = styled.ul`
   &::-webkit-scrollbar-thumb {
     background-color: #acacac;
     border-radius: 10px;
-    /* width: 100px; */
   }
 `;
 
