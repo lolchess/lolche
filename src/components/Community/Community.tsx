@@ -28,36 +28,16 @@ interface Post {
 function Community(): JSX.Element {
   const navigate = useNavigate();
   const [list, setList] = useState<Post[]>([]);
+  const [pagenum, setPagenum] = useState<number>(1);
   const limitNumber = 10;
   const communityRef = collection(dbService, "community");
 
   useEffect(() => {
     const fetchData = async () => {
-      const q = query(communityRef, orderBy("time"), limit(limitNumber));
-      const querySnapshot = await getDocs(q);
-      const items: Post[] = [];
-      querySnapshot.forEach((doc) => {
-        items.push({
-          id: doc.id,
-          title: doc.data().title,
-          nickname: doc.data().userNickname,
-          time: doc.data().time,
-          value: doc.data().value,
-        });
-      });
-      setList(items);
-    };
-    fetchData();
-    // }, []);
-  }); // NOTE: 에러때문에 일단 이렇게 처리
-
-  const showNext = (item: Post) => {
-    const fetchNextData = async () => {
       const q = query(
         communityRef,
-        orderBy("time"),
-        limit(limitNumber),
-        startAfter(item.time)
+        orderBy("time", "desc"),
+        limit(limitNumber)
       );
       const querySnapshot = await getDocs(q);
       const items: Post[] = [];
@@ -72,9 +52,67 @@ function Community(): JSX.Element {
       });
       setList(items);
     };
-    fetchNextData();
+    fetchData();
+  }, []);
+
+  const showPrev = (item: Post) => {
+    const fetchPrevData = async () => {
+      const q = query(
+        communityRef,
+        orderBy("time"),
+        limit(limitNumber),
+        startAfter(item.time)
+      );
+      const querySnapshot = await getDocs(q);
+      const items: Post[] = [];
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach((doc) => {
+          items.push({
+            id: doc.id,
+            title: doc.data().title,
+            nickname: doc.data().userNickname,
+            time: doc.data().time,
+            value: doc.data().value,
+          });
+        });
+        // items 정렬
+        items.sort(function (a, b) {
+          return +b.time - +a.time;
+        });
+
+        setList(items);
+        setPagenum(pagenum - 1);
+      }
+    };
+    fetchPrevData();
   };
 
+  const showNext = (item: Post) => {
+    const fetchNextData = async () => {
+      const q = query(
+        communityRef,
+        orderBy("time", "desc"),
+        limit(limitNumber),
+        startAfter(item.time)
+      );
+      const querySnapshot = await getDocs(q);
+      const items: Post[] = [];
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach((doc) => {
+          items.push({
+            id: doc.id,
+            title: doc.data().title,
+            nickname: doc.data().userNickname,
+            time: doc.data().time,
+            value: doc.data().value,
+          });
+        });
+        setList(items);
+        setPagenum(pagenum + 1);
+      } else alert("마지막 페이지입니다.");
+    };
+    fetchNextData();
+  };
   //   const lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
   //   console.log("last");
   //   const next = query(
@@ -101,17 +139,26 @@ function Community(): JSX.Element {
         }}
       ></StyledSection>
 
-      <StyledSection id="section-communityList" height="700px">
-        <StyledButton onClick={() => navigate("/community/NewPostEditor")}>
-          글 작성
-        </StyledButton>
+      <StyledSection
+        id="section-communityList"
+        height="800px"
+        justifyContent="flex-start"
+        padding="20px"
+      >
         <StyledStack
           column
           alignItem="center"
           width="90%"
           style={{ maxWidth: "1200px" }}
         >
-          <StyledSection id="section-postList" height="500px">
+          <StyledButton onClick={() => navigate("/community/NewPostEditor")}>
+            글 작성
+          </StyledButton>
+          <StyledSection
+            id="section-postList"
+            height="600px"
+            style={{ justifyContent: "flex-start" }}
+          >
             <StyledStack>
               <StyledLi color={"black"}>글 제목 </StyledLi>
               <StyledLi color={"black"}>닉네임 </StyledLi>
@@ -122,11 +169,7 @@ function Community(): JSX.Element {
                 <StyledStack column alignItem="center">
                   <StyledStack>
                     <StyledLi
-                      onClick={() =>
-                        navigate(`/community/${post.id}`, {
-                          state: { value: post.value },
-                        })
-                      }
+                      onClick={() => navigate(`/community/${post.id}`)}
                       color={"black"}
                     >
                       {post.title}
@@ -138,17 +181,30 @@ function Community(): JSX.Element {
               );
             })}
           </StyledSection>
-
-          {list.length < limitNumber ? (
-            <div></div>
-          ) : (
-            <StyledButton
-              style={{ margin: "20px" }}
-              onClick={() => showNext(list[limitNumber - 1])}
-            >
-              다음페이지
-            </StyledButton>
-          )}
+          <StyledStack justifyContent="center">
+            {pagenum <= 1 ? (
+              <div></div>
+            ) : (
+              <StyledButton
+                style={{ margin: "20px" }}
+                onClick={() => showPrev(list[0])}
+              >
+                이전페이지
+              </StyledButton>
+            )}
+            {/* NOTE pagenum을 미리 구해서 현재 페이지가 마지막페이지면 다음페이지 버튼 삭제해야함... */}
+            {pagenum}
+            {list.length < limitNumber ? (
+              <div></div>
+            ) : (
+              <StyledButton
+                style={{ margin: "20px" }}
+                onClick={() => showNext(list[limitNumber - 1])}
+              >
+                다음페이지
+              </StyledButton>
+            )}
+          </StyledStack>
         </StyledStack>
       </StyledSection>
     </div>

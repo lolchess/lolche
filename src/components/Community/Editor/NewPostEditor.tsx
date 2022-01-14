@@ -51,31 +51,39 @@ function NewPostEditor(): JSX.Element {
 
   return (
     <StyledSection height="900px">
-      <StyledStack justifyContent="center">
-        <StyledInput
-          onChange={handleChange}
-          id="community-newPost-title"
-          name="title"
-          type="text"
-          placeholder="제목"
-        />
-        <StyledInput
-          onChange={handleChange}
-          id="community-newPost-nickname"
-          name="nickname"
-          type="text"
-          placeholder="닉네임"
-        />
-      </StyledStack>
+      <div
+        style={{
+          maxWidth: "1200px",
+          justifyContent: "center",
+        }}
+      >
+        <StyledStack justifyContent="center">
+          <StyledInput
+            onChange={handleChange}
+            id="community-newPost-title"
+            name="title"
+            type="text"
+            placeholder="제목"
+          />
+          <StyledInput
+            onChange={handleChange}
+            id="community-newPost-nickname"
+            name="nickname"
+            type="text"
+            placeholder="닉네임"
+          />
+        </StyledStack>
 
-      <TestEditorForm setEditorValue={setEditorValue} />
-      <StyledInput
-        onChange={handleChange}
-        id="community-newPost-password"
-        name="password"
-        type="text"
-        placeholder="비밀번호"
-      />
+        <TestEditorForm setEditorValue={setEditorValue} />
+        <StyledInput
+          onChange={handleChange}
+          id="community-newPost-password"
+          name="password"
+          type="text"
+          placeholder="비밀번호"
+        />
+      </div>
+
       <StyledButton
         onClick={() => {
           SendTheData();

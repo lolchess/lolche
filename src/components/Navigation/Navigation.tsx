@@ -1,11 +1,52 @@
 import { useNavigate } from "react-router";
+import { useState, useRef, useEffect } from "react";
+//NOTE 함수형 컴포넌트 (styled-component)에서 ref을 사용하기 위함
 import styled from "styled-components";
 import { StyledLi } from "../../styles/styles.component";
 import useInput from "../../hooks/useInput";
+import { useLocation } from "react-router";
 
 function Navigation(): JSX.Element {
   const navigate = useNavigate();
   const [input, setInput, onChangeInput] = useInput("");
+  const location = useLocation();
+  const NavLi = () => {
+    const [activeRank, setActiveRank] = useState("");
+    const [activeCommunity, setActiveCommunity] = useState("");
+    const [activeChat, setActiveChat] = useState("");
+    useEffect(() => {
+      if (location.pathname.indexOf("/rank") === 0) setActiveRank("black");
+      if (location.pathname.indexOf("/community") === 0)
+        setActiveCommunity("black");
+      if (location.pathname.indexOf("/Chatting") === 0) setActiveChat("black");
+    }, []);
+
+    return (
+      <LiContainer>
+        <StyledLi
+          id="li-rank"
+          onClick={() => navigate("/rank")}
+          style={{ backgroundColor: activeRank }}
+        >
+          순위표
+        </StyledLi>
+        <StyledLi
+          id="li-community"
+          onClick={() => navigate("/community")}
+          style={{ backgroundColor: activeCommunity }}
+        >
+          커뮤니티
+        </StyledLi>
+        <StyledLi
+          id="li-chat"
+          onClick={() => navigate("/Chatting")}
+          style={{ backgroundColor: activeChat }}
+        >
+          채팅
+        </StyledLi>
+      </LiContainer>
+    );
+  };
 
   const onClickBtn = () => {
     if (!input.length) return;
@@ -26,17 +67,7 @@ function Navigation(): JSX.Element {
         <MenuContainer>
           <Logo onClick={() => navigate("/")}>loltoGG</Logo>
           {/* <StyledLi id="li-home">home</StyledLi> */}
-          <LiContainer>
-            <StyledLi id="li-rank" onClick={() => navigate("/rank")}>
-              순위표
-            </StyledLi>
-            <StyledLi id="li-community" onClick={() => navigate("/community")}>
-              커뮤니티
-            </StyledLi>
-            <StyledLi id="li-chat" onClick={() => navigate("/Chatting")}>
-              채팅
-            </StyledLi>
-          </LiContainer>
+          <NavLi />
         </MenuContainer>
 
         <InputContainer>

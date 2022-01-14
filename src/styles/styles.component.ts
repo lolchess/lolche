@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledLi = styled.li<{ color?: string }>`
   /* font-size: 12px; */
-  /* line-height: 3.66667; */
+  line-height: 3.66667;
   /* font-weight: 400; */
 
   font-size: 13px;
@@ -95,7 +95,6 @@ export const StyledInput = styled.input`
   max-width: 300px;
   outline: none;
   border: 1px solid #bbb;
-  border-radius: 15px;
   display: inline-block;
   box-sizing: border-box;
   transition: 0.2s ease all;
@@ -141,8 +140,9 @@ export const CardText = styled.h2`
   color: #f5f5f5;
 `;
 
-export const StyledSpan = styled.span`
-  color: #f5f5f5;
+export const StyledSpan = styled.span<{ color?: string }>`
+  color: ${(props) => props.color || "#f5f5f5"};
+
   font-size: 15px;
 `;
 export const A = styled.a`
