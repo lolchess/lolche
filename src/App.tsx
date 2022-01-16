@@ -1,6 +1,5 @@
 import React from "react";
 import Community from "./components/Community";
-import Post from "./components/Community/Post";
 import NewPostEditor from "./components/Community/Editor";
 import Navigation from "./components/Navigation";
 import Home from "./components/Home";
@@ -11,6 +10,7 @@ import UserPage from "./components/UserPage";
 import Chatting from "./components/Chatting";
 import styled from "styled-components";
 import UserPageError from "./components/UserPageError";
+import Post from "./components/Community/Post";
 
 function App() {
   return (

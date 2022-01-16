@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 //NOTE 함수형 컴포넌트 (styled-component)에서 ref을 사용하기 위함
 import styled from "styled-components";
 import { StyledLi } from "../../styles/styles.component";

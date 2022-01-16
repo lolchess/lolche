@@ -53,7 +53,7 @@ function Community(): JSX.Element {
       setList(items);
     };
     fetchData();
-  }, []);
+  }, [communityRef]);
 
   const showPrev = (item: Post) => {
     const fetchPrevData = async () => {

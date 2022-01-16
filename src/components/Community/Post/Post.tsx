@@ -8,16 +8,9 @@ import {
   StyledButton,
 } from "../../../styles/styles.component";
 import { dbService } from "../../../myFirebase";
-import {
-  collection,
-  query,
-  orderBy,
-  startAfter,
-  doc,
-  getDoc,
-} from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 
-interface Post {
+interface IPost {
   id: string;
   title: string;
   nickname: string;
@@ -25,17 +18,10 @@ interface Post {
   value: string;
 }
 
-interface Post {
-  id: string;
-  title: string;
-  nickname: string;
-  time: string;
-  value: string;
-}
 function Post(): JSX.Element {
   const location = useLocation();
   const navigate = useNavigate();
-  const [item, setItem] = useState<Post>();
+  const [item, setItem] = useState<IPost>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +33,7 @@ function Post(): JSX.Element {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        const data: Post = {
+        const data: IPost = {
           id: docSnap.id,
           title: docSnap.data().title,
           nickname: docSnap.data().userNickname,
@@ -61,7 +47,7 @@ function Post(): JSX.Element {
       }
     };
     fetchData();
-  }, []); // const { value } = location.state as locationState;
+  }, [location.pathname]); // const { value } = location.state as locationState;
 
   return (
     <>
