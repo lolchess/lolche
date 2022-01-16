@@ -7,6 +7,7 @@ import {
   StyledTd,
   StyledTr,
   StyledSection,
+  StyledButton,
 } from "../../styles/styles.component";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +25,7 @@ const StyledBox = styled.div`
 function RankTable(): JSX.Element {
   const navigate = useNavigate();
   const [list, setList] = useState<null | LeagueItemDTO[]>(null);
+  const [index, setIndex] = useState<number>(50);
 
   useEffect(() => {
     const getRank = async () => {
@@ -61,7 +63,7 @@ function RankTable(): JSX.Element {
           </thead>
           <tbody>
             {list &&
-              list.map((val, index) => {
+              list.slice(0, index).map((val, index) => {
                 return (
                   <StyledTr
                     key={val.summonerId}
@@ -80,6 +82,16 @@ function RankTable(): JSX.Element {
               })}
           </tbody>
         </table>
+        {index >= 300 ? (
+          <></>
+        ) : (
+          <StyledButton
+            style={{ margin: "20px" }}
+            onClick={() => setIndex(index + 50)}
+          >
+            더 보기
+          </StyledButton>
+        )}
       </StyledBox>
     </div>
   );
