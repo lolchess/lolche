@@ -34,6 +34,65 @@ const StyledHomeInput = styled.input`
   box-sizing: border-box;
   transition: 0.2s ease all;
 `;
+
+const RankTable = () => {
+  const [list, setList] = useState<null | LeagueItemDTO[]>(null);
+
+  useEffect(() => {
+    const getRank = async () => {
+      const challenger: LeagueListDTO = await getLeagueByChallenger();
+      setList(
+        challenger.entries.sort((a, b) => b.leaguePoints - a.leaguePoints)
+      );
+    };
+
+    getRank();
+  }, []);
+
+  return (
+    <StyledSection
+      height="270px"
+      justifyContent="flex-start"
+      style={{
+        // overflow: "scroll",
+        overflow: "hidden",
+      }}
+      data-aos="flip-left"
+    >
+      <table
+        style={{
+          minWidth: "100%",
+        }}
+      >
+        <thead>
+          <tr>
+            <StyledTh>순위</StyledTh>
+            <StyledTh>
+              <h3>소환사명</h3>
+            </StyledTh>
+            <StyledTh>
+              <h3>LP</h3>
+            </StyledTh>
+          </tr>
+        </thead>
+        <tbody>
+          {list &&
+            list.map((val, index) => {
+              return (
+                <StyledTr key={val.summonerId}>
+                  <StyledTd>{index + 1}</StyledTd>
+
+                  <StyledTd style={{}}>{val.summonerName}</StyledTd>
+                  <StyledTd> {val.leaguePoints} </StyledTd>
+                </StyledTr>
+              );
+            })}
+        </tbody>
+      </table>
+    </StyledSection>
+  );
+};
+
 function Home(): JSX.Element {
   const navigate = useNavigate();
   AOS.init();
@@ -46,67 +105,14 @@ function Home(): JSX.Element {
     setInput("");
   };
 
-  const RankTable = () => {
-    const [list, setList] = useState<null | LeagueItemDTO[]>(null);
-
-    useEffect(() => {
-      const getRank = async () => {
-        const challenger: LeagueListDTO = await getLeagueByChallenger();
-        setList(
-          challenger.entries.sort((a, b) => b.leaguePoints - a.leaguePoints)
-        );
-      };
-
-      getRank();
-    }, []);
-
-    return (
-      <StyledSection
-        height="270px"
-        justifyContent="flex-start"
-        style={{
-          // overflow: "scroll",
-          overflow: "hidden",
-        }}
-        data-aos="flip-left"
-      >
-        <table
-          style={{
-            minWidth: "100%",
-          }}
-        >
-          <thead>
-            <tr>
-              <StyledTh>순위</StyledTh>
-              <StyledTh>
-                <h3>소환사명</h3>
-              </StyledTh>
-              <StyledTh>
-                <h3>LP</h3>
-              </StyledTh>
-            </tr>
-          </thead>
-          <tbody>
-            {list &&
-              list.map((val, index) => {
-                return (
-                  <StyledTr key={val.summonerId}>
-                    <StyledTd>{index + 1}</StyledTd>
-
-                    <StyledTd style={{}}>{val.summonerName}</StyledTd>
-                    <StyledTd> {val.leaguePoints} </StyledTd>
-                  </StyledTr>
-                );
-              })}
-          </tbody>
-        </table>
-      </StyledSection>
-    );
-  };
   return (
-    <div>
-      <StyledSection id="section-homeSearch" color="#f5f5f5" height="600px">
-        <h1 data-aos="fade-up" data-aos-delay="200">
+    <>
+      <StyledSection id="section-homeSearch" color="#f5f5f5" height="575px">
+        <h1
+          data-aos="fade-up"
+          data-aos-delay="200"
+          style={{ margin: "0 0 20px 0" }}
+        >
           전장의 역사를 확인하세요.
         </h1>
         <StyledStack width="300px" data-aos="fade-in" data-aos-delay="200">
@@ -121,16 +127,17 @@ function Home(): JSX.Element {
           </StyledButton>
         </StyledStack>
       </StyledSection>
+
       <StyledSection
         id="section-homeRank"
-        justifyContent="space-between"
-        height="700px"
-        padding="50px"
+        justifyContent="space-around"
+        height="650px"
+        padding="75px 50px"
       >
-        <h1 data-aos="fade-up" data-aos-delay="300">
+        <h1 data-aos="fade-up" data-aos-delay="300" style={{ margin: 0 }}>
           강함을 증명하세요.
         </h1>
-        <RankTable></RankTable>
+        <RankTable />
         <span
           id="li-rank"
           onClick={() => navigate("/rank")}
@@ -141,12 +148,13 @@ function Home(): JSX.Element {
           {">"} 자세히 보기
         </span>
       </StyledSection>
+
       <StyledStack>
         <StyledSection
           id="section-homeCommunity"
           width="50%"
           color="#f5f5f5"
-          margin="10px"
+          margin="20px 10px 20px 20px"
         >
           <h3>커뮤니티.</h3>
           <span
@@ -159,11 +167,12 @@ function Home(): JSX.Element {
             {">"} 시작하기
           </span>
         </StyledSection>
+
         <StyledSection
           id="section-homeChat"
           width="50%"
           color="#f5f5f5"
-          margin="10px"
+          margin="20px 20px 20px 10px"
         >
           <h3>실시간 채팅.</h3>
           <span
@@ -177,8 +186,14 @@ function Home(): JSX.Element {
           </span>
         </StyledSection>
       </StyledStack>
-      <StyledSection height="300px" color="#202020">
-        <StyledSpan>만든사람들</StyledSpan>
+
+      <StyledSection height="200px" color="#202020">
+        {/* <b> */}
+        {/* <StyledSpan>만든 사람들.</StyledSpan> */}
+        {/* </b> */}
+
+        <h3 style={{ color: "white", margin: "0 0 10px" }}>만든 사람들.</h3>
+
         <A href="https://github.com/seohee-choi">
           <StyledSpan>
             <FontAwesomeIcon icon={faCodeBranch} /> seohee-choi
@@ -190,7 +205,7 @@ function Home(): JSX.Element {
           </StyledSpan>
         </A>
       </StyledSection>
-    </div>
+    </>
   );
 }
 

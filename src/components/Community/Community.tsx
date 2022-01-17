@@ -128,22 +128,26 @@ function Community(): JSX.Element {
   // };
 
   return (
-    <div>
+    <>
       <StyledSection
         id="section-communityHeader"
         color="#f5f5f5"
-        height="300px"
-        style={{
-          background:
-            "linear-gradient(0deg, rgba(201,201,201,1) 0%, rgba(219,219,219,1) 100%)",
-        }}
-      ></StyledSection>
+        height="180px"
+        // style={{
+        //   background:
+        //     "linear-gradient(0deg, rgba(201,201,201,1) 0%, rgba(219,219,219,1) 100%)",
+        // }}
+      >
+        {/* <h1 data-aos="fade-up" data-aos-delay="200"> */}
+        <h1>의견을 나누세요.</h1>
+      </StyledSection>
 
       <StyledSection
         id="section-communityList"
         height="800px"
         justifyContent="flex-start"
         padding="20px"
+        // data-aos="flip-left"
       >
         <StyledStack
           column
@@ -207,7 +211,7 @@ function Community(): JSX.Element {
           </StyledStack>
         </StyledStack>
       </StyledSection>
-    </div>
+    </>
   );
 }
 

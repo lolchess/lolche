@@ -17,11 +17,13 @@ interface UserDataProps {
   leaguePoints: number;
   rank: string;
 }
+
+const RADIUS = 54;
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+
 export default function UserPage(): JSX.Element {
   AOS.init();
 
-  let RADIUS = 54;
-  let CIRCUMFERENCE = 2 * Math.PI * RADIUS;
   const { name } = useParams();
   const [userData, setUserData] = useState<UserDataProps>();
   const [percent, setPercent] = useState({
@@ -36,7 +38,7 @@ export default function UserPage(): JSX.Element {
         rate: CIRCUMFERENCE * (1 - userData.wins / userData.losses),
       });
     }
-  }, [userData, CIRCUMFERENCE]);
+  }, [userData]);
 
   useEffect(() => {
     const getSummoner = async () => {
@@ -54,15 +56,36 @@ export default function UserPage(): JSX.Element {
   }, [name, navigate]);
 
   return (
-    <StyledStack column alignItem="center" height="100%">
+    <StyledStack
+      column
+      alignItem="center"
+      height="100%"
+      style={{ padding: "0 0 15px" }}
+    >
       <StyledSection
-        height="300px"
+        id="section-communityHeader"
+        color="#f5f5f5"
+        height="180px"
+        style={{
+          margin: "0 0 15px",
+        }}
+      >
+        {/* <h1 data-aos="fade-up" data-aos-delay="200"> */}
+        <h1 style={{ margin: "0 0 10px" }}>{name}</h1>
+        <span style={{ margin: 0, fontSize: "20px" }}>
+          소환사님의 정보입니다.
+        </span>
+      </StyledSection>
+
+      {/* 
+      <StyledSection
+        height="100px"
         width="100%"
         justifyContent="flex-end"
         style={{ alignItems: "flex-start", maxWidth: "600px" }}
       >
         <h1> {name}</h1>
-      </StyledSection>
+      </StyledSection> */}
 
       <StyledCard>
         <CardText>
@@ -70,15 +93,18 @@ export default function UserPage(): JSX.Element {
           TIER: {userData?.tier} {userData?.rank}
         </CardText>
       </StyledCard>
+
       <StyledCard>
         <CardText>LP: {JSON.stringify(userData?.leaguePoints)}</CardText>
       </StyledCard>
+
       <StyledCard data-aos="fade-up">
         <CardText>
           전체 전투:{" "}
           {JSON.stringify(userData?.wins && userData?.wins + userData?.losses)}
         </CardText>
       </StyledCard>
+
       <StyledCard data-aos="fade-up">
         <CardText>승리: {JSON.stringify(userData?.wins)}</CardText>
       </StyledCard>
@@ -86,6 +112,7 @@ export default function UserPage(): JSX.Element {
       <StyledCard data-aos="fade-up">
         <CardText>패배: {JSON.stringify(userData?.losses)}</CardText>
       </StyledCard>
+
       <StyledCard data-aos="fade-up" id="card-rate">
         <div
           id="circle-rate-percent"

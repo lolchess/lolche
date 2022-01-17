@@ -132,7 +132,7 @@ export const StyledCard = styled.div`
   align-items: center;
   border-radius: 10px;
   text-align: center;
-  margin: 20px;
+  margin: 15px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 `;

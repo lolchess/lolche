@@ -40,9 +40,11 @@ function RankTable(): JSX.Element {
 
   return (
     <div>
-      <StyledSection height="400px" color="#f5f5f5">
-        <h1>뭔가 멋진 말.</h1>
+      <StyledSection height="180px" color="#f5f5f5">
+        {/* <h1 data-aos="fade-up" data-aos-delay="200"> */}
+        <h1>KR 서버의 소환사들.</h1>
       </StyledSection>
+      {/* <StyledBox data-aos="flip-left"> */}
       <StyledBox>
         <table
           id="container"
