@@ -201,7 +201,7 @@ function Home(): JSX.Element {
         </A>
         <A href="https://github.com/moon9ua">
           <StyledSpan>
-            <FontAwesomeIcon icon={faCodeBranch} /> gua-moon
+            <FontAwesomeIcon icon={faCodeBranch} /> moon9ua
           </StyledSpan>
         </A>
       </StyledSection>
