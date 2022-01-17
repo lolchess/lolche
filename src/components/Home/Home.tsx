@@ -177,7 +177,7 @@ function Home(): JSX.Element {
           <h3>실시간 채팅.</h3>
           <span
             id="li-chat"
-            onClick={() => navigate("/chat")}
+            onClick={() => navigate("/Chatting")}
             style={{
               cursor: "pointer",
             }}
