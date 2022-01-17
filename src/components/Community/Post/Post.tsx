@@ -54,19 +54,19 @@ function Post(): JSX.Element {
       <StyledSection
         id="section-communityHeader"
         color="#f5f5f5"
-        height="300px"
-        style={{
-          background:
-            "linear-gradient(0deg, rgba(201,201,201,1) 0%, rgba(219,219,219,1) 100%)",
-        }}
-      ></StyledSection>
+        height="180px"
+      >
+        <h1>의견을 나누세요.</h1>
+      </StyledSection>
 
       <StyledSection justifyContent="flex-start" padding="30px">
         <StyledStack
           column
           alignItem="flex-start"
           width="80%"
-          style={{ maxWidth: "1200px" }}
+          style={{
+            maxWidth: "1200px",
+          }}
         >
           <StyledStack justifyContent="flex-start">
             <StyledButton
@@ -91,9 +91,9 @@ function Post(): JSX.Element {
           {item && (
             <StyledSpan
               color="black"
-              style={{ minHeight: "800px" }}
+              style={{ minHeight: "500px" }}
               dangerouslySetInnerHTML={{ __html: item.value }}
-            ></StyledSpan>
+            />
           )}
         </StyledStack>
       </StyledSection>
