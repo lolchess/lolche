@@ -54,7 +54,9 @@ function RankTable(): JSX.Element {
         >
           <thead>
             <tr>
-              <StyledTh>순위</StyledTh>
+              <StyledTh>
+                <h3>순위</h3>
+              </StyledTh>
               <StyledTh>
                 <h3>소환사명</h3>
               </StyledTh>
