@@ -174,8 +174,16 @@ function Community(): JSX.Element {
 
           <StyledSection
             id="section-postList"
-            height="100%"
-            // style={{ border: "1px solid #F0F0F0", borderRadius: "20px" }}
+            // height="100%"
+            justifyContent="start"
+            height="550px"
+            style={
+              {
+                // border: "1px solid #F0F0F0",
+                // borderRadius: "20px",
+                // backgroundColor: "red",
+              }
+            }
           >
             <StyledStack>
               <StyledLi color={"black"} style={{ cursor: "auto" }}>
