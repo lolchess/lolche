@@ -29,14 +29,13 @@ const LIMIT_NUMBER = 10;
 
 function Community(): JSX.Element {
   const navigate = useNavigate();
-  const [list, setList] = useState<Post[]>([]);
+  const [Posts, setPosts] = useState<Post[]>([]);
   const [pagenum, setPagenum] = useState<number>(1);
-  const communityRef = collection(dbService, "community");
 
   useEffect(() => {
     const fetchData = async () => {
       const q = query(
-        communityRef,
+        collection(dbService, "community"),
         orderBy("time", "desc"),
         limit(LIMIT_NUMBER)
       );
@@ -54,16 +53,16 @@ function Community(): JSX.Element {
         });
       });
 
-      setList(items);
+      setPosts(items);
     };
 
     fetchData();
-  }, [communityRef]);
+  }, []);
 
   const showPrev = (item: Post) => {
     const fetchPrevData = async () => {
       const q = query(
-        communityRef,
+        collection(dbService, "community"),
         orderBy("time"),
         limit(LIMIT_NUMBER),
         startAfter(item.time)
@@ -86,8 +85,7 @@ function Community(): JSX.Element {
         items.sort(function (a, b) {
           return +b.time - +a.time;
         });
-
-        setList(items);
+        setPosts(items);
         setPagenum(pagenum - 1);
       }
     };
@@ -98,7 +96,7 @@ function Community(): JSX.Element {
   const showNext = (item: Post) => {
     const fetchNextData = async () => {
       const q = query(
-        communityRef,
+        collection(dbService, "community"),
         orderBy("time", "desc"),
         limit(LIMIT_NUMBER),
         startAfter(item.time)
@@ -117,26 +115,13 @@ function Community(): JSX.Element {
             value: doc.data().value,
           });
         });
-        setList(items);
+        setPosts(items);
         setPagenum(pagenum + 1);
       } else alert("마지막 페이지입니다.");
     };
 
     fetchNextData();
   };
-  //   const lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
-  //   console.log("last");
-  //   const next = query(
-  //     communityRef,
-  //     orderBy("time"),
-  //     startAfter(lastVisible),
-  //     limit(5)
-  //   );
-  //   const nextSnapshot = await getDocs(next);
-  //   nextSnapshot.forEach((doc) => {
-  //     console.log(`${doc.id} => ${JSON.stringify(doc.data().userNickname)}`);
-  //   });
-  // };
 
   return (
     <>
@@ -144,18 +129,12 @@ function Community(): JSX.Element {
         id="section-communityHeader"
         color="#f5f5f5"
         height="180px"
-        // style={{
-        //   background:
-        //     "linear-gradient(0deg, rgba(201,201,201,1) 0%, rgba(219,219,219,1) 100%)",
-        // }}
       >
-        {/* <h1 data-aos="fade-up" data-aos-delay="200"> */}
         <h1>의견을 나누세요.</h1>
       </StyledSection>
 
       <StyledSection
         id="section-communityList"
-        // height="800px"
         justifyContent="flex-start"
         // data-aos="flip-left"
       >
@@ -196,9 +175,9 @@ function Community(): JSX.Element {
 
             <StyledDivider />
 
-            {list.map((post) => {
+            {Posts.map((post) => {
               return (
-                <StyledStack column alignItem="center">
+                <StyledStack key={post.id} column alignItem="center">
                   <StyledStack>
                     <StyledLi
                       onClick={() => navigate(`/community/${post.id}`)}
@@ -220,19 +199,19 @@ function Community(): JSX.Element {
             ) : (
               <StyledButton
                 style={{ margin: "20px" }}
-                onClick={() => showPrev(list[0])}
+                onClick={() => showPrev(Posts[0])}
               >
                 이전 페이지
               </StyledButton>
             )}
             {/* NOTE pagenum을 미리 구해서 현재 페이지가 마지막페이지면 다음페이지 버튼 삭제해야함... */}
             <span style={{ fontSize: "16px" }}>{pagenum}</span>
-            {list.length < LIMIT_NUMBER ? (
+            {Posts.length < LIMIT_NUMBER ? (
               <div></div>
             ) : (
               <StyledButton
                 style={{ margin: "20px" }}
-                onClick={() => showNext(list[LIMIT_NUMBER - 1])}
+                onClick={() => showNext(Posts[LIMIT_NUMBER - 1])}
               >
                 다음 페이지
               </StyledButton>
